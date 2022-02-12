@@ -14,6 +14,8 @@ Below are a few screenshots of the web app:
 
 ![Screenshot 1](data/images/disaster-response-project1.png?raw=true "Title")
 
+The above image is the homepage of the app. When you enter a message and click on "classify message", you get a screen that looks like the below image.
+
 ![Screenshot 2](data/images/disaster-response-project2.png?raw=true "Title")
 
 ### Project Components:
