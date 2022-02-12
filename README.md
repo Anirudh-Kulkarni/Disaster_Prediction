@@ -12,9 +12,11 @@ The project includes a web app where an emergency worker can input a new message
 
 Below are a few screenshots of the web app.
 ![Screenshot 1](data/images/disaster-response-project1.png?raw=true "Title")
+
 ![Screenshot 2](data/images/disaster-response-project2.png?raw=true "Title")
 
-Project Components
+### Project Components:
+
 There are three components in this project.
 
 1. ETL Pipeline
