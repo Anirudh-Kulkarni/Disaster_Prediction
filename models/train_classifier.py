@@ -88,9 +88,21 @@ def build_model():
 
     ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
-    
+    use_grid_search = False # set it to true if you want to optimise parameters; takes quite some time though!
+    if use_grid_search == True:
+        parameters = {
+        'features__text_pipeline__vect__ngram_range': ((1, 1), (1, 2)),
+        'clf__estimator__n_estimators': [50, 100],
+        'clf__estimator__min_samples_split': [2, 3]
+        }
+        
+        #Use pipeline.get_params().keys() to know which parameters can be tweaked
+        
+        pipeline_opt = GridSearchCV(pipeline, param_grid=parameters)
+    else:
+        pipeline_opt = pipeline
 
-    return pipeline
+    return pipeline_opt
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
