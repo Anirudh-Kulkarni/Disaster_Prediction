@@ -10,7 +10,8 @@ In the data folder, you'll find a data set containing real messages that were se
 
 The project includes a web app where an emergency worker can input a new message and get classification results in several categories. 
 
-Below are a few screenshots of the web app.
+Below are a few screenshots of the web app:
+
 ![Screenshot 1](data/images/disaster-response-project1.png?raw=true "Title")
 
 ![Screenshot 2](data/images/disaster-response-project2.png?raw=true "Title")
