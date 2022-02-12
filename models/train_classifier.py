@@ -15,6 +15,7 @@ from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import pickle
+from sklearn.model_selection import GridSearchCV
 
 nltk.download('stopwords')
 stop_words = stopwords.words("english")
@@ -22,6 +23,17 @@ lemmatizer = WordNetLemmatizer()
 from sklearn.metrics import classification_report
 
 def load_data(database_filepath):
+    """
+    Function to load the sql database and return the variables needed for the model.
+    
+    Args: 
+    The sql database consisting of the messages and the corresponding categories.
+    		
+    Returns: 
+    The varibles used for model fitting as well as the category names.
+    	
+    """
+    
     # load data from database
     db_file_name = ['sqlite:///', database_filepath]
     engine = create_engine(''.join(db_file_name))
@@ -35,6 +47,16 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """
+    Function to convert input text into tokens.
+    
+    Args: 
+    Input text.
+    		
+    Returns: 
+    The corresponding tokens.
+    	
+    """
     # normalize case and remove punctuation
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     
@@ -47,6 +69,14 @@ def tokenize(text):
     return tokens
 
 def build_model():
+    """
+    Function to build the ML pipeline and perform grid search to obtain optimized parameters for the pipeline.
+    
+
+    Returns: 
+    The ML pipeline.
+    	
+    """
     pipeline = Pipeline([
     ('features', FeatureUnion([
 
@@ -58,10 +88,21 @@ def build_model():
 
     ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
+    
+
     return pipeline
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    
+    """
+    Function that predicts the categories on the test messages.
+    
+    Args: 
+    The ML pipeline, the test messages, the actual categories and the category names.
+    	
+    """
+    
     Y_pred = pd.DataFrame(model.predict(X_test), columns = Y_test.columns)
 
     labels = category_names
@@ -69,6 +110,15 @@ def evaluate_model(model, X_test, Y_test, category_names):
         print(classification_report(Y_test.iloc[:,col_no], Y_pred.iloc[:, col_no]))
 
 def save_model(model, model_filepath):
+    """
+    Function to save the ML model.
+    
+    Args: 
+    The ML pipeline and the path to save the model as a pickle file.
+    		
+    	
+    """
+    
     # save the model to disk
     pickle.dump(model, open(model_filepath, 'wb'))
 
