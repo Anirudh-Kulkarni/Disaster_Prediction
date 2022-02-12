@@ -1,10 +1,20 @@
-
 # import libraries
 import sys
 import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    
+    """
+    Function to load the data sets and combine them into a single datagrame.
+    		
+    Args: 
+    The filepaths of the messages file and the corresponding categories file
+    		
+    Returns: 
+    Dataframe that is the merged output of messages and categories
+    	
+    """
     # load datasets
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
@@ -15,6 +25,16 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    Function to load the data sets and clean the data (so as to give column names corresponding to the different categories).
+    		
+    Args: 
+    The merged dataframe containing the messages and the categories
+    		
+    Returns: 
+    Dataframe that has the messages and one column for each category.
+    	
+    """
     categories1 = df.categories
     categories2 = categories1.str.split(pat=';', n=-1, expand=True)
      
@@ -49,6 +69,13 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    Function to save the dataframe to a sql database.
+    		
+    Args: 
+    The dataframe and the output database filename.
+    	
+    """
     db_file_name = ['sqlite:///', database_filename]
     engine = create_engine(''.join(db_file_name))
     df.to_sql('TableToUse', engine, index=False, if_exists='replace') 
