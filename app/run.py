@@ -6,7 +6,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from flask import Flask
-from flask import render_template, request, jsonify
+from flask import render_template, request
 from plotly.graph_objs import Bar
 import joblib
 from sqlalchemy import create_engine
@@ -15,6 +15,16 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 def tokenize(text):
+    """
+    Function that takes in input text and coverts it into processed tokens.
+    
+    Args: 
+    Text input to be processed
+    		
+    Returns: 
+    Tokens after processing the input text
+    	
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
