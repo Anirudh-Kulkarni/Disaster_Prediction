@@ -10,15 +10,10 @@ In the data folder, you'll find a data set containing real messages that were se
 
 The project includes a web app where an emergency worker can input a new message and get classification results in several categories. 
 
-Below are a few screenshots of the web app:
 
-![Screenshot 1](data/images/disaster-response-project1.png?raw=true "Title")
-
-The above image is the homepage of the app. When you enter a message and click on "classify message", you get a screen that looks like the below image.
-
-![Screenshot 2](data/images/disaster-response-project2.png?raw=true "Title")
 
 ### Project Components:
+
 
 There are three components in this project.
 
@@ -42,6 +37,23 @@ Exports the final model as a pickle file
 
 3. Flask Web App
 Under the app folder, there is a run.py python scipt that launches the app where you can input messages to be classified.
+
+
+Below are a few screenshots of the web app:
+
+##### Home page of the app
+
+![Screenshot 1](data/images/disaster-response-project1.png?raw=true "Title")
+
+
+The above image is the homepage of the app. When you enter a message and click on "classify message", you get a screen that looks like the below image.
+
+##### Example of message classification
+
+![Screenshot 2](data/images/disaster-response-project2.png?raw=true "Title")
+
+
+
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
