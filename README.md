@@ -17,7 +17,7 @@ The project includes a web app where an emergency worker can input a new message
 
 There are three components in this project.
 
-#####1. ETL Pipeline:
+##### 1. ETL Pipeline:
 
 In a Python script under the data folder, process_data.py is a data cleaning pipeline that:
 
@@ -26,7 +26,7 @@ Merges the two datasets
 Cleans the data
 Stores it in a SQLite database
 
-#####2. ML Pipeline:
+##### 2. ML Pipeline:
 
 In a Python script under the models folder, train_classifier.py is a machine learning pipeline that:
 
@@ -37,7 +37,7 @@ Trains and tunes a model using GridSearchCV
 Outputs results on the test set
 Exports the final model as a pickle file
 
-#####3. Flask Web App:
+##### 3. Flask Web App:
 
 Under the app folder, there is a run.py python scipt that launches the app where you can input messages to be classified.
 
