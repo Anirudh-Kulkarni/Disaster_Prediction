@@ -40,8 +40,10 @@ def load_data(database_filepath):
     print(''.join(db_file_name))
     df = pd.read_sql("SELECT * FROM TableToUse", engine)
     X = df['message']
-    category_names = ['id','message', 'original','genre']
-    Y = df.drop(category_names, axis=1)
+    cols_to_drop = ['id','message', 'original','genre']
+    Y = df.drop(cols_to_drop, axis=1)
+    
+    category_names = Y.columns
     
     return X,Y, category_names
 
@@ -119,7 +121,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
     labels = category_names
     for col_no in range(len(labels)):
-        print(classification_report(Y_test.iloc[:,col_no], Y_pred.iloc[:, col_no]))
+        print(labels[col_no],classification_report(Y_test.iloc[:,col_no], Y_pred.iloc[:, col_no]))
 
 def save_model(model, model_filepath):
     """
