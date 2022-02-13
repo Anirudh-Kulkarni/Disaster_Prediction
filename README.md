@@ -46,7 +46,13 @@ Below are a few screenshots of the web app:
 
 ##### Home page of the app
 
+The first image is a bar chart of the number of messages per genre.
+
 ![Screenshot 1](data/images/disaster-response-project1.png?raw=true "Title")
+
+The second image is a pie chart of the proprtion of messages per genre.
+
+![Screenshot 3](data/images/disaster-response-project3.png?raw=true "Title")
 
 
 The above image is the homepage of the app. When you enter a message and click on "classify message", you get a screen that looks like the below image.
