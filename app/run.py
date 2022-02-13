@@ -7,7 +7,7 @@ from nltk.tokenize import word_tokenize
 
 from flask import Flask
 from flask import render_template, request
-from plotly.graph_objs import Bar
+from plotly.graph_objs import Bar, Pie
 import joblib
 from sqlalchemy import create_engine
 
@@ -49,12 +49,11 @@ model = joblib.load("../models/classifier.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    genre_proportions = df.groupby('genre').count()['message']/sum(genre_counts)
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
@@ -66,6 +65,26 @@ def index():
 
             'layout': {
                 'title': 'Distribution of Message Genres',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Genre"
+                }
+            }
+        },
+
+    
+        {
+            'data': [
+                Pie(
+                    labels=genre_names,
+                    values=genre_proportions
+                )
+            ],
+        
+            'layout': {
+                'title': 'Pie chart of the distributions',
                 'yaxis': {
                     'title': "Count"
                 },
