@@ -52,9 +52,10 @@ def clean_data(df):
     for column in categories2:
         # set each value to be the last character of the string
         categories2[column] = categories2[column].str[-1]
-        # convert column from string to numeric
+       
+        # convert column from string to numeric and making it binary!
         
-        #categories2[column] = categories2[column].astype("Int64")
+        categories2[column] = categories2[column].astype('float').astype('Int32') > 0
         
     categories2['id'] = df['id']
     
