@@ -1,79 +1,98 @@
-# Disaster_Prediction
+# Disaster Prediction
 
-Udacity project on analyzing disaster data and predicting the disaster category from the input messages
+## Project Overview
 
+This  project focuses on analyzing disaster data to predict disaster categories based on input messages. By leveraging real messages sent during disaster events, we develop a model that classifies these messages for timely assistance. This project was done as a part of the [Udacity Data Scientist Nanodegree program](https://www.udacity.com/course/data-scientist-nanodegree--nd025). 
 
-Project Overview
-In this project, we analyze disaster data from Appen (formally Figure 8) to build a model for an API that classifies disaster messages.
+## Table of Contents
 
-In the data folder, you'll find a data set containing real messages that were sent during disaster events. We create a machine learning pipeline to categorize these events so that we can send the messages to an appropriate disaster relief agency.
+1. [Project Components](#project-components)
+   - [ETL Pipeline](#1-etl-pipeline)
+   - [ML Pipeline](#2-ml-pipeline)
+   - [Flask Web App](#3-flask-web-app)
+2. [Web App Preview](#web-app-preview)
+3. [Instructions](#instructions)
+4. [License](#license)
 
-The project includes a web app where an emergency worker can input a new message and get classification results in several categories. 
+## Project Components
 
+The project consists of three main components:
 
+### 1. ETL Pipeline
 
-### Project Components:
+The **ETL (Extract, Transform, Load)** process is implemented in the `process_data.py` script located in the `data` folder. This pipeline performs the following tasks:
 
+- Loads datasets containing messages and categories
+- Merges the datasets
+- Cleans the data
+- Stores the cleaned data in a SQLite database
 
-There are three components in this project.
+### 2. ML Pipeline
 
-##### 1. ETL Pipeline:
+The **Machine Learning** pipeline is implemented in the `train_classifier.py` script located in the `models` folder. This pipeline includes:
 
-In a Python script under the data folder, process_data.py is a data cleaning pipeline that:
+- Loading data from the SQLite database
+- Splitting the dataset into training and testing sets
+- Building a text processing and machine learning pipeline
+- Training and tuning the model using `GridSearchCV`
+- Outputting results on the test set
+- Exporting the final model as a pickle file
 
-Loads the messages and categories datasets
-Merges the two datasets
-Cleans the data
-Stores it in a SQLite database
+### 3. Flask Web App
 
-##### 2. ML Pipeline:
+The Flask web application is launched using the `run.py` script located in the `app` folder. This app allows emergency workers to input messages and receive classification results across several disaster categories.
 
-In a Python script under the models folder, train_classifier.py is a machine learning pipeline that:
+## Web App Preview
 
-Loads data from the SQLite database
-Splits the dataset into training and test sets
-Builds a text processing and machine learning pipeline
-Trains and tunes a model using GridSearchCV
-Outputs results on the test set
-Exports the final model as a pickle file
-
-##### 3. Flask Web App:
-
-Under the app folder, there is a run.py python scipt that launches the app where you can input messages to be classified.
+Here are a few screenshots of the web app:
 
 
 Below are a few screenshots of the web app:
 
 ##### Home page of the app
 
-The first image is a bar chart of the number of messages per genre.
+- **Bar Chart of Messages per Genre:**
 
 ![Screenshot 1](data/images/disaster-response-project1.png?raw=true "Title")
 
-The second image is a pie chart of the proprtion of messages per genre.
+- **Pie Chart of Message Proportions by Genre:**
 
 ![Screenshot 3](data/images/disaster-response-project3.png?raw=true "Title")
 
 
-The above image is the homepage of the app. When you enter a message and click on "classify message", you get a screen that looks like the below image.
+### Message Classification
 
-##### Example of message classification
+When you enter a message and click "Classify Message," you receive results displayed in a user-friendly format:
 
 ![Screenshot 2](data/images/disaster-response-project2.png?raw=true "Title")
 
 
+## Instructions
 
+To set up the database and model, follow these steps:
 
-### Instructions:
-1. Run the following commands in the project's root directory to set up your database and model.
+1. Run the ETL pipeline to clean the data and store it in the database:
+   ```bash
+   python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+   ```
 
-    - To run ETL pipeline that cleans data and stores in database
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
-    - To run ML pipeline that trains classifier and saves
-        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
+2. Train the machine learning classifier and save the model:
+   ```bash
+   python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
+   ```
 
-2. Go to `app` directory: `cd app`
+3. Navigate to the `app` directory:
+   ```bash
+   cd app
+   ```
 
-3. Run your web app: `python run.py`
+4. Run the web app:
+   ```bash
+   python run.py
+   ```
 
-4. Open the webpage and type in your message to predict the disaster category.
+5. Open your web browser and type in a message to predict the disaster category.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
